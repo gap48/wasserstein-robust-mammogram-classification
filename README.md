@@ -1,7 +1,7 @@
 # Reliable Mammography Classification Framework Incorporating Wasserstein-Based Distributionally Robust Stochastic Optimization
 
 
-This framework introduces a distributionally robust mammography classification approach that integrates a hierarchical Swin Transformer with Wasserstein-metric optimization. The methodology systematically addresses the inherent variability in medical imaging through three key mechanisms:
+The framework introduces a distributionally robust mammography classification approach that integrates a hierarchical Swin Transformer with Wasserstein-metric optimization. The methodology systematically addresses the inherent variability in medical imaging through three key mechanisms:
 
 1. **Distribution Shift Handling**: Addresses domain variations by constraining adversarial perturbations within the Wasserstein ball, ensuring learned representations remain invariant to shifts across institutions and annotation styles
 2. **Robust Optimization Against Label Noise**: Incorporates a Wasserstein-constrained adversarial training procedure to iteratively update input samples, effectively countering label noise and annotation inconsistencies
