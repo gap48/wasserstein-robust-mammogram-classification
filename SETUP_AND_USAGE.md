@@ -1,8 +1,5 @@
 # Setup and Usage Instructions
 
-
-# Setup and Usage Instructions
-
 ## Required Directory Structure
 
 Before running the code, ensure the following directory structure:
