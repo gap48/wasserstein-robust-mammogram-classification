@@ -1,5 +1,6 @@
 # Reliable Mammography Classification Framework Incorporating Wasserstein-Based Distributionally Robust Stochastic Optimization
 
+
 This framework introduces a distributionally robust mammography classification approach that integrates a hierarchical Swin Transformer with Wasserstein-metric optimization. The methodology systematically addresses the inherent variability in medical imaging through three key mechanisms:
 
 1. **Distribution Shift Handling**: Addresses domain variations by constraining adversarial perturbations within the Wasserstein ball, ensuring learned representations remain invariant to shifts across institutions and annotation styles
@@ -12,13 +13,27 @@ The framework formulates the classification task as a minimax problem:
 
 $$\min_{\theta} \max_{P \in B(\hat{P}, \epsilon)} \mathbb{E}_{(x,y) \sim P} [\ell(\theta; x, y)] ,$$
 
-with $B(\hat{P}, \epsilon)$ representing a Wasserstein ϵ-ball around the empirical distribution $\hat{P}$.
+with $B(\hat{P}, \epsilon)$ representing a Wasserstein $\epsilon$-ball around the empirical distribution $\hat{P}$.
 
 The optimization process employs an adaptive step size:
 
-$$x^{(t+1)}_{\text{adv}} = x^{(t)}_{\text{adv}} + \alpha_t \left( \nabla_{x_{\text{adv}}} \ell(\theta; x^{(t)}_{\text{adv}}, y) - \beta(x^{(t)}_{\text{adv}} - x) \right),$$
+$$x^{(t+1)}_{\mathrm{adv}} = x^{(t)}_{\mathrm{adv}} + \alpha_t \left( \nabla_{x_{\mathrm{adv}}} \ell(\theta; x^{(t)}_{\mathrm{adv}}, y) - \beta(x^{(t)}_{\mathrm{adv}} - x) \right),$$
 
 with an adaptive step size $\alpha_t = \epsilon/\sqrt{t + 2}$ that enforces the Wasserstein constraint while effectively countering label noise and annotation inconsistencies.
+
+### Theoretical Guarantees
+
+This implementation provides several theoretical guarantees:
+
+1. **Convergence Rate**: The algorithm converges at rate $O(1/\sqrt{T})$ to a local maximum of the adversarial loss.
+2. **Wasserstein Constraint**: The final adversarial example satisfies: $W_2(x^{(T)}_{\mathrm{adv}}, x) \leq \epsilon + O(1/\beta)$
+3. **Loss Improvement**: The adversarial loss satisfies: $\ell(\theta; x^{(T)}_{\mathrm{adv}}, y) \geq \ell(\theta; x, y) + \Omega(\epsilon^2)$ when $\beta$ is appropriately chosen.
+
+This formulation ensures that the generated adversarial examples:
+- Meaningfully increase the classification loss
+- Remain within a controlled Wasserstein distance from the original sample
+- Converge to stable perturbations that reflect realistic distribution shifts
+- Maintain medical image validity through appropriate constraint selection
 
 ### Key Components
 
