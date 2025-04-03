@@ -1,7 +1,6 @@
 # Reliable Mammography Classification Framework Incorporating Wasserstein-Based Distributionally Robust Stochastic Optimization
 
-
-The framework introduces a distributionally robust mammography classification approach that integrates a hierarchical Swin Transformer with Wasserstein-metric optimization. The methodology systematically addresses the inherent variability in medical imaging through three key mechanisms:
+This framework introduces a distributionally robust mammography classification approach that integrates a hierarchical Swin Transformer with Wasserstein-metric optimization. The methodology systematically addresses the inherent variability in medical imaging through three key mechanisms:
 
 1. **Distribution Shift Handling**: Addresses domain variations by constraining adversarial perturbations within the Wasserstein ball, ensuring learned representations remain invariant to shifts across institutions and annotation styles
 2. **Robust Optimization Against Label Noise**: Incorporates a Wasserstein-constrained adversarial training procedure to iteratively update input samples, effectively countering label noise and annotation inconsistencies
@@ -17,7 +16,7 @@ with $B(\hat{P}, \epsilon)$ representing a Wasserstein $\epsilon$-ball around th
 
 The optimization process employs an adaptive step size:
 
-$$x^{(t+1)}_{\mathrm{adv}} = x^{(t)}_{\mathrm{adv}} + \alpha_t \left( \nabla_{x_{\mathrm{adv}}} \ell(\theta; x^{(t)}_{\mathrm{adv}}, y) - \beta(x^{(t)}_{\mathrm{adv}} - x) \right),$$
+$$x_{\text{adv}}^{(t+1)} = x_{\text{adv}}^{(t)} + \alpha_t \left( \nabla_{x_{\text{adv}}} \ell(\theta; x_{\text{adv}}^{(t)}, y) - \beta(x_{\text{adv}}^{(t)} - x) \right),$$
 
 with an adaptive step size $\alpha_t = \epsilon/\sqrt{t + 2}$ that enforces the Wasserstein constraint while effectively countering label noise and annotation inconsistencies.
 
@@ -26,8 +25,8 @@ with an adaptive step size $\alpha_t = \epsilon/\sqrt{t + 2}$ that enforces the 
 This implementation provides several theoretical guarantees:
 
 1. **Convergence Rate**: The algorithm converges at rate $O(1/\sqrt{T})$ to a local maximum of the adversarial loss.
-2. **Wasserstein Constraint**: The final adversarial example satisfies: $W_2(x^{(T)}_{\mathrm{adv}}, x) \leq \epsilon + O(1/\beta)$
-3. **Loss Improvement**: The adversarial loss satisfies: $\ell(\theta; x^{(T)}_{\mathrm{adv}}, y) \geq \ell(\theta; x, y) + \Omega(\epsilon^2)$ when $\beta$ is appropriately chosen.
+2. **Wasserstein Constraint**: The final adversarial example satisfies: $W_2(x_{\text{adv}}^{(T)}, x) \leq \epsilon + O(1/\beta)$
+3. **Loss Improvement**: The adversarial loss satisfies: $\ell(\theta; x_{\text{adv}}^{(T)}, y) \geq \ell(\theta; x, y) + \Omega(\epsilon^2)$ when $\beta$ is appropriately chosen.
 
 This formulation ensures that the generated adversarial examples:
 - Meaningfully increase the classification loss
@@ -41,6 +40,7 @@ This formulation ensures that the generated adversarial examples:
 - **WRM Loss**: Implements Wasserstein Risk Minimization with controlled adversarial examples
 - **Visualization Tools**: Includes attention map visualization and Grad-CAM for model interpretability
 - **Class-Balanced Training**: Handles inherent class imbalance in medical imaging datasets
+
 
 ## Command Line Arguments
 
