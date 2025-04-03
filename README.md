@@ -1,2 +1,1 @@
-# wasserstein-robust-mammogram-classification
-Reliable Mammography Classification Framework Incorporating Wasserstein-Based Distributionally Robust Stochastic Optimization
+# Reliable Mammography Classification Framework Incorporating Wasserstein-Based Distributionally Robust Stochastic Optimization
